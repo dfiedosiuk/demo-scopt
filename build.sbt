@@ -30,14 +30,15 @@ docker / dockerfile := {
   }
 }
 
-val appName = "ArgsPrintApp"
-val appVersion = 1.2
-val versionName = s"_${appVersion}"
-
 docker / imageNames := Seq(
-  // Sets the latest tag
-  ImageName(appName+versionName))
+  ImageName(s"${organization.value}/${name.value}:latest"),
 
+  ImageName(
+    namespace = Some(organization.value),
+    repository = name.value,
+    tag = Some("v" + version.value)
+  )
+)
 libraryDependencies += "com.github.scopt" %% "scopt" % "4.0.1"
 
 
